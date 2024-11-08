@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title>PrimeFaces Full Example</title>
+
+        <!-- PrimeFaces CSS -->
+        <h:outputStylesheet name="primefaces.css" />
+    </h:head>
+
+    <h:body>
+
+        <!-- Header -->
+        <h:form>
+            <p:toolbar>
+                <p:toolbarGroup>
+                    <p:commandButton value="Home" icon="pi pi-home" />
+                    <p:commandButton value="Profile" icon="pi pi-user" />
+                    <p:commandButton value="Settings" icon="pi pi-cog" />
+                </p:toolbarGroup>
+            </p:toolbar>
+        </h:form>
+
+        <!-- Panel -->
+        <p:panel header="PrimeFaces Components" style="margin-top: 20px;">
+            <h:outputText value="This is a showcase of PrimeFaces components." />
+        </p:panel>
+
+        <!-- Input Components -->
+        <h:form>
+            <p:inputText value="#{helloBean.message}" label="Message" />
+            <p:password id="password" value="#{helloBean.password}" label="Password" />
+            <p:selectOneMenu value="#{helloBean.selectedOption}" label="Options">
+                <f:selectItem itemLabel="Option 1" itemValue="1" />
+                <f:selectItem itemLabel="Option 2" itemValue="2" />
+                <f:selectItem itemLabel="Option 3" itemValue="3" />
+            </p:selectOneMenu>
+            <p:commandButton value="Submit" action="#{helloBean.submit}" />
+        </h:form>
+
+        <!-- DataTable -->
+        <p:panel header="Data Table Example" style="margin-top: 20px;">
+            <p:dataTable value="#{helloBean.users}" var="user" rows="5">
+                <p:column headerText="Name">
+                    <h:outputText value="#{user.name}" />
+                </p:column>
+                <p:column headerText="Email">
+                    <h:outputText value="#{user.email}" />
+                </p:column>
+                <p:column headerText="Actions">
+                    <p:commandButton value="Delete" action="#{helloBean.deleteUser(user)}" />
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+
+        <!-- Dialog -->
+        <p:commandButton value="Open Dialog" icon="pi pi-info-circle" onclick="PF('dlg').show();" />
+        <p:dialog id="dlg" header="Information" widgetVar="dlg" modal="true" closable="true">
+            <h:outputText value="This is a PrimeFaces dialog box!" />
+            <p:commandButton value="Close" onclick="PF('dlg').hide();" />
+        </p:dialog>
+
+        <!-- Calendar -->
+        <h:form>
+            <p:calendar value="#{helloBean.selectedDate}" pattern="yyyy/MM/dd" showButtonPanel="true" />
+        </h:form>
+
+        <!-- InputNumber -->
+        <p:inputNumber value="#{helloBean.amount}" minValue="0" maxValue="100" />
+
+        <!-- Panel Grid for Layout -->
+        <p:panelGrid columns="2" style="margin-top: 20px;">
+            <h:outputLabel value="Field 1: " />
+            <p:inputText value="#{helloBean.field1}" />
+            <h:outputLabel value="Field 2: " />
+            <p:inputText value="#{helloBean.field2}" />
+        </p:panelGrid>
+
+        <!-- Output -->
+        <h:outputText value="Selected Option: #{helloBean.selectedOption}" rendered="#{not empty helloBean.selectedOption}" />
+        <h:outputText value="Amount: #{helloBean.amount}" rendered="#{not empty helloBean.amount}" />
+
+    </h:body>
+</html>
